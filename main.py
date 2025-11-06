@@ -109,7 +109,11 @@ while not es.stop():
     iteration += 1
     # Update visualization every 5 iterations
     if iteration % 5 == 0 or iteration == 1:
-        visualizer.update(es.mean, es.best.f)  # Assuming visualizer plots mean/obj
+        # Get current best objectives (R2 and MAPE)
+        best_objectives = multiobj_func(es.mean)  # [-R2, MAPE]
+        r2_value = -best_objectives[0]  # Convert back to positive R2
+        mape_value = best_objectives[1]
+        visualizer.update(es.mean, es.best.f, r2=r2_value, mape=mape_value)
 
 # Results
 print(f"Best params: {es.result.xbest}")  # [a1,b1,c1,...,a5,b5,c5]
