@@ -39,11 +39,11 @@ class OptimizationVisualizer:
         self.ax3.grid(True, alpha=0.3)
         self.ax3.set_ylim(0, 1)
         
-        # Bottom-right plot: MAPE over iterations
+        # Bottom-right plot: Total Incremental Contribution over iterations
         self.line_mape, = self.ax4.plot([], [], 'r-', linewidth=2)
         self.ax4.set_xlabel('Iteration')
-        self.ax4.set_ylabel('MAPE')
-        self.ax4.set_title('MAPE Convergence')
+        self.ax4.set_ylabel('Total Contribution')
+        self.ax4.set_title('Total Contribution Convergence')
         self.ax4.grid(True, alpha=0.3)
         
         plt.tight_layout()
@@ -62,7 +62,7 @@ class OptimizationVisualizer:
             mean: Current mean solution vector
             best_fitness: Current best fitness value (scalarized)
             r2: Current R2 score (optional)
-            mape: Current MAPE value (optional)
+            mape: Current total incremental contribution (optional, kept as 'mape' for backward compatibility)
         """
         self.trajectory.append(mean.copy())
         self.fitness_history.append(best_fitness)
@@ -97,7 +97,7 @@ class OptimizationVisualizer:
             self.line_r2.set_data(range(len(self.r2_history)), self.r2_history)
             self.ax3.set_xlim(0, len(self.r2_history))
         
-        # Update MAPE plot
+        # Update Total Contribution plot
         if len(self.mape_history) > 0:
             self.line_mape.set_data(range(len(self.mape_history)), self.mape_history)
             self.ax4.set_xlim(0, len(self.mape_history))
