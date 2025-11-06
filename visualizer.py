@@ -65,8 +65,9 @@ class OptimizationVisualizer:
         # Update fitness plot
         self.line_fitness.set_data(range(len(self.fitness_history)), self.fitness_history)
         self.ax2.set_xlim(0, len(self.fitness_history))
-        if len(self.fitness_history) > 1:
-            self.ax2.set_ylim(min(self.fitness_history) - 1, max(self.fitness_history) + 5)
+        self.ax2.set_ylim(-0.4, -0.2)
+        # if len(self.fitness_history) > 1:
+        #     self.ax2.set_ylim(min(self.fitness_history) - 1, max(self.fitness_history) + 5)
         
         # Refresh the plot
         self.fig.canvas.draw()
